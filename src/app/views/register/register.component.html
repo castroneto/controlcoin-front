@@ -1,0 +1,25 @@
+
+<div class="container-app">
+    <div class="card">
+
+        <div class="form-container">
+            <img class="logo" src="../../assets/image.png" alt="">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-grup">
+                <div>
+                  <input class="input-text" formControlName="username" required placeholder="Nome" type="text">
+                </div>
+                <div>
+                  <input class="input-text" formControlName="email" required placeholder="Email" type="email">
+                </div>
+                <div>
+                    <input class="input-text" formControlName="password" required placeholder="Password" type="password">
+                  </div>
+                <input type="submit" class="button-register" value="Cadastrar">
+
+                <hr>
+                <input routerLink="/login" class="button-login" value="Login">
+
+              </form>
+        </div>
+    </div>
+</div>

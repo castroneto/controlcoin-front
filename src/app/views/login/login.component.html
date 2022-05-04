@@ -1,0 +1,24 @@
+
+<div class="flex-container">
+    <div class="card">
+        <div class="image-container">
+            <img src="../../assets/banner.png" alt="">
+        </div>
+        <div class="form-container">
+          <img class="logo" src="../../assets/image.png" alt="">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-grup">
+                <div>
+                  <input class="input-text" formControlName="email" required placeholder="Email" type="email">
+                </div>
+                <div>
+                  <input class="input-text" formControlName="password" required placeholder="Password" type="password">
+                </div>
+                <a class="forgot" href="#">Esqueceu sua senha?</a>
+                <input type="submit" class="button-login" value="Entrar">
+                <hr>
+                <input type="submit" routerLink="/register" class="button-register" value="Cadastrar">
+
+              </form>
+        </div>
+    </div>
+</div>

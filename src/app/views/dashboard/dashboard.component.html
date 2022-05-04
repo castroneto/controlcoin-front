@@ -1,0 +1,77 @@
+<div class="container-main">
+
+    <div class="menu">
+        <button (click)="logout()" style="margin: 20px; color: rgb(255, 255, 255);" class="btn-title">Sair <i class="fa fa-arrow-right"></i> </button>
+    </div>
+
+    <div class="main">
+
+
+        <div class="panel">
+
+            <div class="card">
+               <h5 class="card-title  text-uppercase text-muted  mb-0">Entrada</h5>
+               <span class="h2 font-weight-bold text-success  mb-0"><i class="fa fa-arrow-up"></i> {{ resume?.input | currency : 'R$' }} </span>
+            </div>
+            <div  class="card" >
+               <h5 class="card-title text-uppercase text-muted mb-0">Saida</h5>
+               <span class="h2 text-danger font-weight-bold mb-0"><i class="fa fa-arrow-down"></i> {{ resume?.output | currency : 'R$' }} </span>
+            </div>
+            <div  class="card">
+               <h5 class="card-title text-uppercase text-muted mb-0">Total</h5>
+               <span class="h2 font-weight-bold mb-0"> {{ resume?.total | currency  : 'R$' }} </span>
+            </div>
+                
+        </div>
+
+        <div style="margin-top: 50px;">
+            
+        <button (click)="openModal(template)" class="btn-title"><i class="fa fa-plus"></i> Nova Transação</button>
+        </div>
+
+        <table>
+            <tr>
+              <th>descrição</th>
+              <th>valor</th>
+              <th>data</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let transaction of transactions"  [ngClass]="{'input': transaction.entry, 'output': !transaction.entry }">
+              <td class="td"> {{ transaction.description }}</td>
+              <td>{{ transaction.value | currency : 'R$' }}</td>
+              <td>{{ formatDate(transaction.createdAt) | date : 'dd/MM/yyyy' }}</td>
+              <td>
+               <button (click)="deleteTransaction(transaction)" class="btn-title"><i class="fa fa-trash"></i></button>
+               </td>
+            </tr>
+          </table>
+    </div>
+    
+</div>
+
+
+<ng-template #template>
+   <form [formGroup]="transactionForm" (ngSubmit)="addTransaction()">
+      <div class="modal-header">
+         <h4 class="modal-title pull-left">Nova Transação</h4>
+         <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true">×</span>
+         </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="description" required placeholder="Descrição">
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control" formControlName="value" required placeholder="Valor">
+          </div>
+          <select formControlName="entry" required class="form-control form-control">
+            <option [value]="true">Entrada</option>
+            <option [value]="false">Saida</option>
+          </select>
+      </div>
+      <div class="modal-footer">
+         <button type="submit" class="btn btn-success">Adicionar</button>
+      </div>
+   </form>
+</ng-template>
